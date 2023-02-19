@@ -72,17 +72,6 @@ public class StudentService {
     }
 
     public String increaseAttendance(Integer subid, Authentication authentication) throws Exception {
-//        Optional<Subject> OptionalSubject = subjectRepository.findById(subid);
-//
-//        if(OptionalSubject.isPresent()){
-//            Subject subject = OptionalSubject.get();
-//            subject.setAttendedClasses(subject.getAttendedClasses()+1);
-//            subject.setTotalClasses(subject.getTotalClasses()+1);
-//            subjectRepository.save(subject);
-//            return "attendance marked successfully";
-//        }
-//
-//        throw new Exception("attendance can't be marked");
         Optional<UserEntity> OptionalUser = userEntityRepository.findByEmail(authentication.getName());
         if (OptionalUser.isPresent()) {
             List<Subject> subjects = subjectRepository.findAllByUserEntity(OptionalUser.get());
@@ -100,19 +89,6 @@ public class StudentService {
     }
 
     public String decreaseAttendance(Integer subid, Authentication authentication) throws Exception {
-//        Optional<Subject> OptionalSubject = subjectRepository.findById(subid);
-//
-//        if(OptionalSubject.isPresent()){
-//            Subject subject = OptionalSubject.get();
-//            subject.setAttendedClasses(subject.getAttendedClasses()-1);
-//            subject.setTotalClasses(subject.getTotalClasses()+1);
-//            subjectRepository.save(subject);
-//
-//            return "attendance marked successfully";
-//        }
-//
-//        throw new Exception("attendance can't be marked");
-
         Optional<UserEntity> OptionalUser = userEntityRepository.findByEmail(authentication.getName());
         if (OptionalUser.isPresent()) {
             List<Subject> subjects = subjectRepository.findAllByUserEntity(OptionalUser.get());
@@ -133,19 +109,6 @@ public class StudentService {
     }
 
     public String resetAttendance(Integer subid, Authentication authentication) throws Exception {
-//        Optional<Subject> OptionalSubject = subjectRepository.findById(subid);
-//
-//        if(OptionalSubject.isPresent()){
-//            Subject subject= OptionalSubject.get();
-//            subject.setTotalClasses(0);
-//            subject.setAttendedClasses(0);
-//            subjectRepository.save(subject);
-//            return "reset done";
-//        }
-//
-//        throw new Exception("attendance can't be updated");
-//    }
-
         Optional<UserEntity> OptionalUser = userEntityRepository.findByEmail(authentication.getName());
         if (OptionalUser.isPresent()) {
             List<Subject> subjects = subjectRepository.findAllByUserEntity(OptionalUser.get());
