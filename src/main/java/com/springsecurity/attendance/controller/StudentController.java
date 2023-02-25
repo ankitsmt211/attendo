@@ -61,4 +61,9 @@ public class StudentController {
        return studentService.getSubjects(authentication);
 
     }
+
+    @GetMapping("/subjects/{subid}/attendance")
+    public double getAttendance(Authentication authentication, @PathVariable Integer subid){
+        return studentService.getAttendancePercentage(authentication,subid);
+    }
 }

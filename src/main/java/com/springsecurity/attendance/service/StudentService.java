@@ -123,4 +123,25 @@ public class StudentService {
         }
         throw new UsernameNotFoundException("User not found");
     }
+
+    public double getAttendancePercentage(Authentication authentication, Integer subid){
+        //percent = attendedclass/total * 100
+        //fetch subject
+        int attendedClasses = 0;
+        int totalClasses = 0;
+        Optional<UserEntity> optionalUserEntity = userEntityRepository.findByEmail(authentication.getName());
+        if(optionalUserEntity.isPresent()){
+            List<Subject> subjects = subjectRepository.findAllByUserEntity(optionalUserEntity.get());
+            for(Subject sub: subjects){
+                if(sub.getSubId()==subid){
+                     attendedClasses = sub.getAttendedClasses();
+                     totalClasses = sub.getTotalClasses();
+                }
+            }
+        }
+
+        double attendancePercent = (attendedClasses*100)/totalClasses;
+
+        return attendancePercent;
+    }
 }
