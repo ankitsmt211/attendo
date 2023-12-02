@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/auth")
+@CrossOrigin
 public class AuthenticationController {
     @Autowired
     private final JwtService jwtService;
@@ -48,7 +49,6 @@ public class AuthenticationController {
         System.out.println(authentication.getName());
         return token;
     }
-
     @PostMapping("/register")
     public String register(@RequestBody RegisterDto registerDto){
         UserEntity user = new UserEntity();
