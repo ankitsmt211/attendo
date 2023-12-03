@@ -8,6 +8,8 @@ import com.springsecurity.attendance.repository.UserEntityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -41,18 +43,19 @@ public class AuthenticationController {
     }
 
     @PostMapping ("/login")
-    public String Login(@RequestBody LoginDto loginDto){
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
        Authentication authentication = authenticationManager.authenticate(
                new UsernamePasswordAuthenticationToken(loginDto.email(),loginDto.password())
        );
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtService.generateToken(authentication);
         logger.info(token);
-        return token;
+        return ResponseEntity.status(HttpStatus.OK).body(token);
     }
     @PostMapping("/register")
-    public String register(@RequestBody RegisterDto registerDto){
+    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
         UserEntity user = new UserEntity();
         user.setUsername(registerDto.username());
         user.setPassword(passwordEncoder.encode(registerDto.password()));
@@ -60,11 +63,6 @@ public class AuthenticationController {
         user.setRole("ROLE_USER");
 
         userEntityRepository.save(user);
-
-        return "user saved successfully";
-
-
+        return ResponseEntity.status(HttpStatus.OK).body("User Registered Successfully");
     }
-
-
 }
