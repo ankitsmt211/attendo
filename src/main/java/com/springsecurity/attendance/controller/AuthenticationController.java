@@ -5,6 +5,8 @@ import com.springsecurity.attendance.dto.LoginDto;
 import com.springsecurity.attendance.dto.RegisterDto;
 import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.repository.UserEntityRepository;
+import com.springsecurity.attendance.response.customResponse;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +67,11 @@ public class AuthenticationController {
         }
     }
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
+    public customResponse register(@RequestBody RegisterDto registerDto){
+        if(accountExists(registerDto.email())){
+            return new customResponse(HttpStatus.BAD_REQUEST,"account already exists");
+        }
+
         UserEntity user = new UserEntity();
         user.setUsername(registerDto.username());
         user.setPassword(passwordEncoder.encode(registerDto.password()));
@@ -73,6 +79,11 @@ public class AuthenticationController {
         user.setRole("ROLE_USER");
 
         userEntityRepository.save(user);
-        return ResponseEntity.status(HttpStatus.OK).body("User Registered Successfully");
+        return new customResponse(HttpStatus.OK,"user created successfully");
+    }
+
+    private boolean accountExists(String email){
+        Optional<UserEntity> userOptional = userEntityRepository.findByEmail(email);
+        return userOptional.isPresent();
     }
 }
