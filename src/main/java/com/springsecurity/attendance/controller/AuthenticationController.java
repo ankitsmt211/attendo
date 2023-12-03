@@ -1,22 +1,13 @@
 package com.springsecurity.attendance.controller;
 
-import com.springsecurity.attendance.config.JwtService;
 import com.springsecurity.attendance.dto.LoginDto;
 import com.springsecurity.attendance.dto.RegisterDto;
-import com.springsecurity.attendance.model.UserEntity;
-import com.springsecurity.attendance.repository.UserEntityRepository;
 import com.springsecurity.attendance.response.CustomResponse;
-import java.util.Optional;
+import com.springsecurity.attendance.service.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,62 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/auth")
 @CrossOrigin
 public class AuthenticationController {
-    @Autowired
-    private final JwtService jwtService;
-
-
-    @Autowired
-    private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private final UserEntityRepository userEntityRepository;
-
-    @Autowired
-    private final AuthenticationManager authenticationManager;
+   private AuthenticationService authenticationService;
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
-    public AuthenticationController(JwtService jwtService,  PasswordEncoder passwordEncoder, UserEntityRepository userEntityRepository, AuthenticationManager authenticationManager) {
-        this.jwtService = jwtService;
-        this.passwordEncoder = passwordEncoder;
-        this.userEntityRepository = userEntityRepository;
-        this.authenticationManager = authenticationManager;
+    @Autowired
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService=authenticationService;
     }
 
     @PostMapping ("/login")
-    public CustomResponse login(@RequestBody LoginDto loginDto){
-        try{
-            Authentication authentication = authenticationManager.authenticate(
-              new UsernamePasswordAuthenticationToken(loginDto.email(),loginDto.password())
-            );
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            String token = jwtService.generateToken(authentication);
-            logger.info(token);
-            return new CustomResponse(true,"logged in successfully",token);
-        }
-        catch (AuthenticationException exception){
-            logger.warn("user/password did not match with records");
-            return new CustomResponse(false,"user with given email/password can not be found");
-        }
+    public CustomResponse login(@RequestBody LoginDto loginDto) throws AuthenticationException{
+        return authenticationService.login(loginDto);
     }
     @PostMapping("/register")
     public CustomResponse register(@RequestBody RegisterDto registerDto){
-        if(accountExists(registerDto.email())){
-            return new CustomResponse(false,"account already exists");
-        }
-
-        UserEntity user = new UserEntity();
-        user.setUsername(registerDto.username());
-        user.setPassword(passwordEncoder.encode(registerDto.password()));
-        user.setEmail(registerDto.email());
-        user.setRole("ROLE_USER");
-
-        userEntityRepository.save(user);
-        return new CustomResponse(true,"user created successfully");
-    }
-
-    private boolean accountExists(String email){
-        Optional<UserEntity> userOptional = userEntityRepository.findByEmail(email);
-        return userOptional.isPresent();
+      return authenticationService.register(registerDto);
     }
 }
