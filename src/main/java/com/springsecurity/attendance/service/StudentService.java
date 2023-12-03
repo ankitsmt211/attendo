@@ -14,13 +14,10 @@ import java.util.Optional;
 
 @Service
 public class StudentService {
-
-    @Autowired
     private final UserEntityRepository userEntityRepository;
-
-    @Autowired
     private final SubjectRepository subjectRepository;
 
+    @Autowired
     public StudentService(UserEntityRepository userEntityRepository, SubjectRepository subjectRepository) {
         this.userEntityRepository = userEntityRepository;
         this.subjectRepository = subjectRepository;

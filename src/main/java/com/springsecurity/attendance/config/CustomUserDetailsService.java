@@ -3,6 +3,7 @@ package com.springsecurity.attendance.config;
 import com.springsecurity.attendance.exception.UserNotFoundException;
 import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.repository.UserEntityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ import java.util.Optional;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private  UserEntityRepository userEntityRepository;
-
+    @Autowired
     public CustomUserDetailsService(UserEntityRepository userEntityRepository) {
         this.userEntityRepository = userEntityRepository;
     }
