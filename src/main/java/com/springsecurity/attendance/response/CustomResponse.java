@@ -3,24 +3,24 @@ package com.springsecurity.attendance.response;
 import org.springframework.http.HttpStatus;
 
 public class CustomResponse {
-  private HttpStatus status;
+  private boolean status;
   private String message;
   private String payload;
-  public CustomResponse(HttpStatus status,String message){
+  public CustomResponse(boolean status,String message){
     this.status=status;
     this.message=message;
   }
 
-  public CustomResponse(HttpStatus status,String message,String payload){
+  public CustomResponse(boolean status,String message,String payload){
     this(status,message);
     this.payload=payload;
   }
 
-  public HttpStatus getStatus() {
+  public boolean getStatus() {
     return status;
   }
 
-  public void setStatus(HttpStatus status) {
+  public void setStatus(boolean status) {
     this.status = status;
   }
 
