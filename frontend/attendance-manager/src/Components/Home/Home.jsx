@@ -7,8 +7,8 @@ export default function Home(){
      <BrowserRouter>
               <Routes>
                 <Route path='/' element={<div>Insert Your main Component here</div>}/>
-                <Route path='/signin' element={<Login/>}/>
-                <Route path='/signup' element={<Register/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/register' element={<Register/>}/>
               </Routes>
     </BrowserRouter>
     </>

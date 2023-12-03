@@ -39,7 +39,7 @@ const Register = () => {
       return;
     }
     delete input.cnfPassword
-    const url = `http://localhost:8080/v1/register/`;   //change end point of api
+    const url = `http://localhost:8080/api/v1/auth/register`;   //change end point of api
     const response = await fetch(url,{
       method:"POST",
       headers:{
@@ -63,7 +63,7 @@ const Register = () => {
       alert(data.msg)
     }else{
       alert('account created');
-      navigate("/signin");
+      navigate("/login");
     }
   }
   return (
@@ -79,7 +79,7 @@ const Register = () => {
 
             <button className='signup-btn' onClick={registerUser}>Sign Up</button>
         </form>
-         <Link className='signup-link' to="/signin">Click here to Sign in</Link>
+         <Link className='signup-link' to="/login">Click here to Sign in</Link>
 
     </div>
 
