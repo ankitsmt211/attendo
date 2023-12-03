@@ -77,7 +77,7 @@ const Register = () => {
             <input  onChange={(e)=>setPassword(e.target.value)} type="password" name="password" id="password" placeholder='Password' required={true}/>
             <input  onChange={(e)=>setCnfPassword(e.target.value)} type="password" name="password" id="cnfpassword" placeholder='Confirm Password' required={true}/>
 
-            <button className='signup-btn' onClick={registerUser}>Sign Up</button>
+            <button className='signup-btn' onClick={registerUser}>Register</button>
         </form>
          <Link className='signup-link' to="/login">Click here to Sign in</Link>
 
