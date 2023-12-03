@@ -5,6 +5,8 @@ import com.springsecurity.attendance.dto.LoginDto;
 import com.springsecurity.attendance.dto.RegisterDto;
 import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.repository.UserEntityRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +31,7 @@ public class AuthenticationController {
 
     @Autowired
     private final AuthenticationManager authenticationManager;
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     public AuthenticationController(JwtService jwtService,  PasswordEncoder passwordEncoder, UserEntityRepository userEntityRepository, AuthenticationManager authenticationManager) {
         this.jwtService = jwtService;
@@ -45,8 +48,7 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtService.generateToken(authentication);
-
-        System.out.println(authentication.getName());
+        logger.info(token);
         return token;
     }
     @PostMapping("/register")
