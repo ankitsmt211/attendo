@@ -1,5 +1,6 @@
 package com.springsecurity.attendance.config;
 
+import com.springsecurity.attendance.exception.UserNotFoundException;
 import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.repository.UserEntityRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,12 +21,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public MyUserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<UserEntity> OptionalUserEntity = userEntityRepository.findByEmail(email);
+        Optional<UserEntity> userEntityOptional = userEntityRepository.findByEmail(email);
 
-        if(OptionalUserEntity.isPresent()){
-            return new MyUserDetails(OptionalUserEntity.get());
-        }
-
-        throw new UsernameNotFoundException("user not found");
+        return new MyUserDetails(userEntityOptional.orElseThrow(() ->
+          new UserNotFoundException("User not found")));
     }
 }

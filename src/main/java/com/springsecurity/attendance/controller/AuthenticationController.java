@@ -13,9 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/auth")
@@ -44,15 +49,20 @@ public class AuthenticationController {
 
     @PostMapping ("/login")
     public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
-       Authentication authentication = authenticationManager.authenticate(
-               new UsernamePasswordAuthenticationToken(loginDto.email(),loginDto.password())
-       );
+        try{
+            Authentication authentication = authenticationManager.authenticate(
+              new UsernamePasswordAuthenticationToken(loginDto.email(),loginDto.password())
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String token = jwtService.generateToken(authentication);
-        logger.info(token);
-        return ResponseEntity.status(HttpStatus.OK).body(token);
+            String token = jwtService.generateToken(authentication);
+            logger.info(token);
+            return ResponseEntity.status(HttpStatus.OK).body(token);
+        }
+        catch (AuthenticationException exception){
+            logger.warn("user/password did not match with records");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user with that email/password found");
+        }
     }
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
