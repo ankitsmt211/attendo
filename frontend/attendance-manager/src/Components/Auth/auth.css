@@ -57,7 +57,7 @@ button.signup-btn:hover {
     background-color: #45a049;
 }
 
-.signup-link {
+.signup-link,.register-link {
     text-decoration: none;
     color: #007bff;
     margin-top: 10px;

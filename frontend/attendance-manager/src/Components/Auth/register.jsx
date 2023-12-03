@@ -79,7 +79,7 @@ const Register = () => {
 
             <button className='signup-btn' onClick={registerUser}>Register</button>
         </form>
-         <Link className='signup-link' to="/login">Click here to Sign in</Link>
+         <Link className='signup-link' to="/login">Click here to login</Link>
 
     </div>
 
