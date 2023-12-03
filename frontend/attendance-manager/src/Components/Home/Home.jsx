@@ -1,32 +1,15 @@
 import '../Home/Home.css'
-
+import {BrowserRouter , Routes , Route} from "react-router-dom";
+import Register from "../Auth/register";
+import Login from "../Auth/Login";
 export default function Home(){
     return <>
-    <Login/>
-    </>
-}
-
-function Login(){
-    return<>
-    <div id="form-container">
-    <form>
-        <div id="input-container">
-            <div className='field-container'>
-            <label htmlFor="username">username</label>
-            <input type="text" name="username"/>
-            </div>
-
-            <div className='field-container'>
-            <label htmlFor="password">password</label>
-            <input type="password" name="password"/>
-            </div>
-
-        </div>
-        <div id="button-container">
-            <button type="submit">Login</button>
-            <button type="button">Register</button>
-        </div>
-    </form>
-    </div>
+     <BrowserRouter>
+              <Routes>
+                <Route path='/' element={<div>Insert Your main Component here</div>}/>
+                <Route path='/signin' element={<Login/>}/>
+                <Route path='/signup' element={<Register/>}/>
+              </Routes>
+    </BrowserRouter>
     </>
 }
