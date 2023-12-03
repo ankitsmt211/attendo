@@ -5,7 +5,7 @@ import com.springsecurity.attendance.dto.LoginDto;
 import com.springsecurity.attendance.dto.RegisterDto;
 import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.repository.UserEntityRepository;
-import com.springsecurity.attendance.response.customResponse;
+import com.springsecurity.attendance.response.CustomResponse;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class AuthenticationController {
     }
 
     @PostMapping ("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
+    public CustomResponse login(@RequestBody LoginDto loginDto){
         try{
             Authentication authentication = authenticationManager.authenticate(
               new UsernamePasswordAuthenticationToken(loginDto.email(),loginDto.password())
@@ -59,17 +59,17 @@ public class AuthenticationController {
 
             String token = jwtService.generateToken(authentication);
             logger.info(token);
-            return ResponseEntity.status(HttpStatus.OK).body(token);
+            return new CustomResponse(HttpStatus.OK,"logged in successfully",token);
         }
         catch (AuthenticationException exception){
             logger.warn("user/password did not match with records");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user with that email/password found");
+            return new CustomResponse(HttpStatus.NOT_FOUND,"user with given email/password can not be found");
         }
     }
     @PostMapping("/register")
-    public customResponse register(@RequestBody RegisterDto registerDto){
+    public CustomResponse register(@RequestBody RegisterDto registerDto){
         if(accountExists(registerDto.email())){
-            return new customResponse(HttpStatus.BAD_REQUEST,"account already exists");
+            return new CustomResponse(HttpStatus.BAD_REQUEST,"account already exists");
         }
 
         UserEntity user = new UserEntity();
@@ -79,7 +79,7 @@ public class AuthenticationController {
         user.setRole("ROLE_USER");
 
         userEntityRepository.save(user);
-        return new customResponse(HttpStatus.OK,"user created successfully");
+        return new CustomResponse(HttpStatus.OK,"user created successfully");
     }
 
     private boolean accountExists(String email){
