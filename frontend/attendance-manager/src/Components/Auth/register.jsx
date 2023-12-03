@@ -60,9 +60,9 @@ const Register = () => {
     //   msg : 'Account Created Successfully'
     // }
     if (!data.status){
-      alert(data.msg)
+      alert(data.message)
     }else{
-      alert('account created');
+      alert(data.message);
       navigate("/login");
     }
   }

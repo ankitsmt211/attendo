@@ -8,6 +8,10 @@ const Login = () => {
   const [password,setPassword]=useState()
   const navigate = useNavigate()
 
+  const handleToken=(token)=>{
+    localStorage.setItem("token",token)
+  }
+
   const handleLogin = async(e)=>{
     e.preventDefault()
 
@@ -27,19 +31,16 @@ const Login = () => {
 
     const responseData = await response.json()
 
-    if(responseData.status){
-      if(responseData.status=="OK"){
+    
+      if(responseData.status){
         const token = responseData.payload
-        alert(token)
+        handleToken(token)
         navigate("/")
       }
-      if(responseData.status=="NOT_FOUND"){
+      if(!responseData.status){
         alert(responseData.message)
       }
-      else{
-        alert("something wrong")
-      }
-    }
+    
   }
 
   return (

@@ -58,17 +58,17 @@ public class AuthenticationController {
 
             String token = jwtService.generateToken(authentication);
             logger.info(token);
-            return new CustomResponse(HttpStatus.OK,"logged in successfully",token);
+            return new CustomResponse(true,"logged in successfully",token);
         }
         catch (AuthenticationException exception){
             logger.warn("user/password did not match with records");
-            return new CustomResponse(HttpStatus.NOT_FOUND,"user with given email/password can not be found");
+            return new CustomResponse(false,"user with given email/password can not be found");
         }
     }
     @PostMapping("/register")
     public CustomResponse register(@RequestBody RegisterDto registerDto){
         if(accountExists(registerDto.email())){
-            return new CustomResponse(HttpStatus.BAD_REQUEST,"account already exists");
+            return new CustomResponse(false,"account already exists");
         }
 
         UserEntity user = new UserEntity();
@@ -78,7 +78,7 @@ public class AuthenticationController {
         user.setRole("ROLE_USER");
 
         userEntityRepository.save(user);
-        return new CustomResponse(HttpStatus.OK,"user created successfully");
+        return new CustomResponse(true,"user created successfully");
     }
 
     private boolean accountExists(String email){
