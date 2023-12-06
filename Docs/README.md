@@ -1,12 +1,4 @@
-## Attendance Management
+## Attendo
 
- A backend spring boot based spring application, using Spring Security and JWT's to authenticate and authorise a user.
-
-It communicates with MYSQL DB at backend using REST API's to manipulate data.
-
-### Tech-Stack
-1. Core Java
-1. Spring Boot
-1. Spring Security
-1. JWT's
-1. Spring Jpa + MYSQL
+### Backend
+Attendo is a Spring Boot backed _**attendance management system**_ that allows you to manage and track the attendance for your classes. It uses **spring security** along with JWT for authentication, ensuring that only authorized users can access the system. It provides RESTful API to interact with the system, allowing you to perform various operations such as adding, deleting, editing, getting your attendance. It also allows you to add/remove subjects. It uses MYSQL for persisting attendance records and user credentials. Attendo is a modern and user-friendly solution for your attendance management needs.
