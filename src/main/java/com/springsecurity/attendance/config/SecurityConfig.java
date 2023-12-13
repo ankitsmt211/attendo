@@ -34,6 +34,7 @@ public class SecurityConfig {
     }
 
 
+    //oauth2Login adds oauth filter in the filter chain
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.oauth2Login();
@@ -48,6 +49,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    //keeps record of client registration object
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository(){
         ClientRegistration clientRegistration = clientRegistration();
@@ -61,6 +63,8 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
     return authenticationConfiguration.getAuthenticationManager();
     }
+
+    // CommonOAuthProvider can be used for common auth providers with minimal configuration
     public ClientRegistration clientRegistration(){
         return CommonOAuth2Provider
                 .GITHUB
