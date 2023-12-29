@@ -20,6 +20,7 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final UserEntityRepository userEntityRepository;
 
+
     @Autowired
     public SecurityConfig(JwtAuthFilter jwtAuthFilter, UserEntityRepository userEntityRepository) {
         this.jwtAuthFilter = jwtAuthFilter;
@@ -29,7 +30,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http
+        //cors need to enabled, followed by @CrossOrigin annotation on controller for
+        //request with auth token
+        http.cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**").permitAll()
@@ -44,7 +47,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
     @Bean
     public PasswordEncoder passwordEncoder(){
        return new BCryptPasswordEncoder();
