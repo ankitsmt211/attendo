@@ -35,7 +35,7 @@ const Login = () => {
       if(responseData.status){
         const token = responseData.payload
         handleToken(token)
-        navigate("/")
+        navigate("/userhome")
       }
       if(!responseData.status){
         alert(responseData.message)
