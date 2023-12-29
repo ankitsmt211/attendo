@@ -19,14 +19,12 @@ import java.io.IOException;
 @Component
 
 public class JwtAuthFilter extends OncePerRequestFilter {
-    private final UserEntityRepository userEntityRepository;
     private final JwtService jwtService;
     private final CustomUserDetailsService customUserDetailsService;
     private final Logger logger = LoggerFactory.getLogger(JwtAuthFilter.class);
 
     @Autowired
-    public JwtAuthFilter(UserEntityRepository userEntityRepository, JwtService jwtService, CustomUserDetailsService customUserDetailsService) {
-        this.userEntityRepository = userEntityRepository;
+    public JwtAuthFilter(JwtService jwtService, CustomUserDetailsService customUserDetailsService) {
         this.jwtService = jwtService;
         this.customUserDetailsService = customUserDetailsService;
     }
@@ -40,8 +38,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             //extract name
             String username = jwtService.extractUsernameFromToken(token);
-            //check validity
 
+            //check validity
             if(jwtService.isTokenValid(token)){
                 MyUserDetails user = customUserDetailsService.loadUserByUsername(username);
 
@@ -50,8 +48,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                         null,
                         user.getAuthorities()
                 );
-
-                //verify this line
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
