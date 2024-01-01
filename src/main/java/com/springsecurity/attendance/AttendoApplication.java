@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 
-public class TokensApplication {
+public class AttendoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TokensApplication.class, args);
+		SpringApplication.run(AttendoApplication.class, args);
 	}
 
 }

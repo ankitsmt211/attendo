@@ -17,16 +17,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    @Autowired
     private final JwtAuthFilter jwtAuthFilter;
 
     @Autowired
-    private final UserEntityRepository userEntityRepository;
-
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter, UserEntityRepository userEntityRepository) {
+    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
         this.jwtAuthFilter = jwtAuthFilter;
-        this.userEntityRepository = userEntityRepository;
     }
 
 
@@ -35,6 +30,7 @@ public class SecurityConfig {
         http
                 .cors()
                 .and()
+
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**").permitAll()

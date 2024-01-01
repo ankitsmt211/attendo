@@ -17,18 +17,11 @@ import java.io.IOException;
 @Component
 
 public class JwtAuthFilter extends OncePerRequestFilter {
-
-    @Autowired
-    private final UserEntityRepository userEntityRepository;
-
-    @Autowired
     private final JwtService jwtService;
-
-    @Autowired
     private final CustomUserDetailsService customUserDetailsService;
 
-    public JwtAuthFilter(UserEntityRepository userEntityRepository, JwtService jwtService, CustomUserDetailsService customUserDetailsService) {
-        this.userEntityRepository = userEntityRepository;
+    @Autowired
+    public JwtAuthFilter(JwtService jwtService, CustomUserDetailsService customUserDetailsService) {
         this.jwtService = jwtService;
         this.customUserDetailsService = customUserDetailsService;
     }

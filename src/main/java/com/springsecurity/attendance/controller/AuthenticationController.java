@@ -17,19 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/auth")
 @CrossOrigin
 public class AuthenticationController {
-    @Autowired
     private final JwtService jwtService;
-
-
-    @Autowired
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
     private final UserEntityRepository userEntityRepository;
-
-    @Autowired
     private final AuthenticationManager authenticationManager;
 
+    @Autowired
     public AuthenticationController(JwtService jwtService,  PasswordEncoder passwordEncoder, UserEntityRepository userEntityRepository, AuthenticationManager authenticationManager) {
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
@@ -61,8 +54,6 @@ public class AuthenticationController {
         userEntityRepository.save(user);
 
         return "user saved successfully";
-
-
     }
 
 
