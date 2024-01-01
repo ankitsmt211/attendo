@@ -1,0 +1,165 @@
+/* .subject-list{
+    border: 1px solid green;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subject-name:hover{
+    cursor: pointer;
+    font-size: large;
+}
+
+.subject-block{
+    display: flex;
+    height: 30px;
+    margin: 10px;
+}
+
+.subject-name{
+    width: 120px;
+    text-align: center;
+    margin: 2px;
+    margin-left: 15px;
+    border: 1px solid black;
+    border-radius: 7%;
+}
+
+.subject-attendance-percent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.new-subject-container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    margin-bottom: 10px;
+}
+
+.new-subject-input{
+    margin: 10px;
+    height: 25px;
+    width: 180px;
+}
+
+.increment-attendance-button,.decrement-attendance-button{
+    width: 50px;
+    border-radius: 40px;
+    border: 0px;
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+.increment-attendance-button{
+    background-color: #01db01f1;
+    color: #006400;
+    font-weight: 700;
+}
+
+.increment-attendance-button:hover{
+    filter: brightness(70%);
+}
+
+.decrement-attendance-button{
+    background-color: #F08080;
+    color: #8B0000;
+    font-weight: 700;
+}
+
+.decrement-attendance-button:hover{
+    filter: brightness(70%);
+} */
+
+.subject-list {
+    border: 1px solid green;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subject-name:hover {
+    cursor: pointer;
+    font-size: large;
+    transition: font-size 0.3s ease;
+}
+
+.subject-block {
+    display: flex;
+    height: 30px;
+    margin: 10px;
+}
+
+.subject-name {
+    width: 120px;
+    text-align: center;
+    margin: 2px;
+    margin-left: 15px;
+    border: 1px solid black;
+    border-radius: 7%;
+}
+
+.subject-attendance-percent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.new-subject-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    margin-bottom: 10px;
+}
+
+.new-subject-input {
+    margin: 10px;
+    height: 25px;
+    width: 180px;
+}
+
+.increment-attendance-button,
+.decrement-attendance-button {
+    width: 50px;
+    border-radius: 40px;
+    border: 0px;
+    font-family: 'Roboto', sans-serif;
+    /* padding: 10px; */
+}
+
+.increment-attendance-button {
+    background-color: #01db01f1;
+    color: #006400;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.increment-attendance-button:hover {
+    filter: brightness(70%);
+}
+
+.decrement-attendance-button {
+    background-color: #F08080;
+    color: #8B0000;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.decrement-attendance-button:hover {
+    filter: brightness(70%);
+}

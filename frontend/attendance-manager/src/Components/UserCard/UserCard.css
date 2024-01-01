@@ -1,0 +1,34 @@
+.user-container{
+    display: flex;
+    border: 1px solid black;
+}
+
+.user-avatar-with-name{
+    border: 1px solid red;
+    width: 470px;
+}
+
+.user-avatar{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.user-name{
+    text-align: center;
+    padding: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+.user-info-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* padding: 10px; */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
