@@ -1,5 +1,4 @@
 .base-container{
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
 }
@@ -7,4 +6,14 @@
 .subjects-container{
     display: flex;
     border: 1px solid black;
+}
+
+.application-name{
+    border: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 100px;
+    text-align: center;
+    color: #455A52;
+    margin-top: -100px;
 }

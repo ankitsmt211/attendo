@@ -23,7 +23,7 @@ export default function SubjectsCard({setCurrentSubject,subjectList,setSubjects}
         }
         <div className='new-subject-container'>
             <input type='text' ref={addSubjectRef} className='new-subject-input'/>
-            <button className='add-subject' onClick={handleAddSubject}>add subject</button>
+            <button className='add-subject-button' onClick={handleAddSubject}>add subject</button>
         </div>
     </div>
     </>

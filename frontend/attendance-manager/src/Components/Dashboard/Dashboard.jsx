@@ -18,6 +18,7 @@ export default function Dashboard(){
 
     return <>
     <div className="base-container">
+        <h1 className="application-name">{'attendo'}</h1>
         <div className="">
             <UserCard/>
         </div>
