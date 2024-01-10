@@ -80,12 +80,27 @@
 } */
 
 .subject-list {
-    border: 1px solid black;
+    margin: 10px;
+    margin-top: 20px;
+    /* border: 1px solid black; */
     font-family: 'Roboto', sans-serif;
-    font-weight: 600;
+    font-weight: 800;
   
     overflow-y: scroll;
-    height: 400px;
+    height: 350px;
+    /* background-color: #99B0A7; */
+    /* background-color: #768C83; */
+    border-right: 2px solid black;
+    
+}
+
+.subject-with-attendance{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+    align-items: center;
+    text-transform: uppercase;
+    flex-wrap: wrap;
 }
 
 .subject-list::-webkit-scrollbar{
@@ -100,19 +115,24 @@
 
 .subject-block {
     display: flex;
-    height: 30px;
+    /* min-height: 25px; */
     margin: 10px;
+    justify-content: center;  
 }
 
 .subject-name {
-    width: 200px;
+  
     color: #455A52;
-    text-align: center;
+    text-align: left;
     margin: 2px;
-    margin-left: 15px;
-    border: 1px solid black;
-    border-radius: 25px;
-    background-color: white;
+    min-height: 25px;
+    width: 200px;
+    /* margin-left: 15px; */
+    /* border: 1px solid black; */
+    /* border-radius: 25px; */
+    /* background-color: white; */
+   
+    /* border-top: 1px solid grey; */
 }
 
 .subject-attendance-percent {
@@ -135,15 +155,51 @@
 
 .new-subject-input {
     margin: 10px;
-    margin-left: -48px;
-    height: 25px;
+    height: 26px;
     width: 200px;
+    border-radius: 40px;
+    border: 0;
+    filter: drop-shadow(black 1px 1px 3px);
 }
 
 .add-subject-button{
-    margin-left:-50px ;
-    background-color: #455A52;
-    color: #f5f5f5;
+    margin-top: 10px;
+    /* background-color: #455A52;
+    color: #f5f5f5; */
+    width: 90px;
+    height: 33px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    filter: drop-shadow(black 1px 1px 3px);
+}
+
+.add-subject-button:hover{
+    margin-top: 10px;
+    /* background-color: #455A52;
+    color: #f5f5f5; */
+    width: 93px;
+    height: 35px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    filter: drop-shadow(black 1px 1px 3px);
 }
 
 .increment-attendance-button,
@@ -155,6 +211,7 @@
     background-color: #455A52;
     color: #f5f5f5;
     /* padding: 10px; */
+    display: none;
 }
 
 .increment-attendance-button {

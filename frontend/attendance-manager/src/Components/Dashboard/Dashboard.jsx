@@ -19,12 +19,14 @@ export default function Dashboard(){
     return <>
     <div className="base-container">
         <h1 className="application-name">{'attendo'}</h1>
-        <div className="">
-            <UserCard/>
-        </div>
-        <div className="subjects-container">
-            <SubjectsCard setCurrentSubject={setCurrentSubject} subjectList={subjects} setSubjects={setSubjects}/>
-            <SubjectInfo currentSubject={currentSubject} subjectList={subjects}/>
+        <div className="dashboard-user">
+            <div className="">
+                <UserCard/>
+            </div>
+            <div className="subjects-container">
+                <SubjectsCard setCurrentSubject={setCurrentSubject} subjectList={subjects} setSubjects={setSubjects}/>
+                <SubjectInfo currentSubject={currentSubject} subjectList={subjects}/>
+            </div>
         </div>
     </div>
     </>

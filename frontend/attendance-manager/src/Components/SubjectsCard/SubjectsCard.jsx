@@ -23,7 +23,7 @@ export default function SubjectsCard({setCurrentSubject,subjectList,setSubjects}
         }
         <div className='new-subject-container'>
             <input type='text' ref={addSubjectRef} className='new-subject-input'/>
-            <button className='add-subject-button' onClick={handleAddSubject}>add subject</button>
+            <button className='add-subject-button' onClick={handleAddSubject}>add</button>
         </div>
     </div>
     </>
@@ -31,7 +31,8 @@ export default function SubjectsCard({setCurrentSubject,subjectList,setSubjects}
 
 function Subject({subjectDetails,setCurrentSubject,setSubjects,subjectList}){
     const handleCurrentSubject = (e)=>{
-        setCurrentSubject(e.target.innerText)
+        console.log(e.target.innerText.toLowerCase())
+        setCurrentSubject(e.target.innerText.toLowerCase())
     }
 
     const handleIncrement = ()=>{
@@ -71,8 +72,10 @@ function Subject({subjectDetails,setCurrentSubject,setSubjects,subjectList}){
     return<>
       <div className='subject-block'>
          <button type='button' className='decrement-attendance-button' onClick={handleDecrement}>{'<'}</button>
-         <div className='subject-name' onClick={e=>handleCurrentSubject(e)}>{subjectDetails.name}</div>
-         <div className='subject-attendance-percent'>{Math.floor((subjectDetails.attendedClasses/subjectDetails.totalClasses)*100)}</div>
+         <div className='subject-with-attendance'>
+            <div className='subject-name' onClick={e=>handleCurrentSubject(e)}>{subjectDetails.name}</div>
+            <div className='subject-attendance-percent'>{Math.floor((subjectDetails.attendedClasses/subjectDetails.totalClasses)*100)}</div>
+         </div>
          <button type='button' className='increment-attendance-button' onClick={handleIncrement}>{'>'}</button>
     </div>
     </>
