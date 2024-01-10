@@ -35,48 +35,12 @@ function Subject({subjectDetails,setCurrentSubject,setSubjects,subjectList}){
         setCurrentSubject(e.target.innerText.toLowerCase())
     }
 
-    const handleIncrement = ()=>{
-        const modifiedSubjects =  subjectList.map(sub=>{
-            if(sub.name==subjectDetails.name){
-               
-                return {
-                    ...sub,
-                    attendedClasses: sub.attendedClasses+1,
-                    totalClasses: sub.totalClasses+1
-                }
-            }
-            else{
-                return sub
-            }
-        })
-        setSubjects(modifiedSubjects)
-    }
-
-    const handleDecrement = ()=>{
-        const modifiedSubjects = subjectList.map(sub=>{
-            if(sub.name==subjectDetails.name){
-                
-                return {
-                    ...sub,
-                    totalClasses:sub.totalClasses+1
-                }
-            }
-            else{
-                return sub
-            }
-        })
-
-        setSubjects(modifiedSubjects)
-    }
-
     return<>
       <div className='subject-block'>
-         <button type='button' className='decrement-attendance-button' onClick={handleDecrement}>{'<'}</button>
          <div className='subject-with-attendance'>
             <div className='subject-name' onClick={e=>handleCurrentSubject(e)}>{subjectDetails.name}</div>
             <div className='subject-attendance-percent'>{Math.floor((subjectDetails.attendedClasses/subjectDetails.totalClasses)*100)}</div>
          </div>
-         <button type='button' className='increment-attendance-button' onClick={handleIncrement}>{'>'}</button>
     </div>
     </>
 }
