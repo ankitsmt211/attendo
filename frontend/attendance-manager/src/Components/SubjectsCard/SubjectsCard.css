@@ -87,6 +87,7 @@
     font-weight: 800;
   
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 350px;
     /* background-color: #99B0A7; */
     /* background-color: #768C83; */
@@ -125,8 +126,9 @@
     color: #455A52;
     text-align: left;
     margin: 2px;
-    min-height: 25px;
     width: 200px;
+    word-wrap: break-word;
+    min-height: 25px;
     /* margin-left: 15px; */
     /* border: 1px solid black; */
     /* border-radius: 25px; */
@@ -141,6 +143,7 @@
     align-items: center;
     margin: 0 10px;
     width: 50px;
+    min-height: 25px;
 }
 
 .new-subject-container {
