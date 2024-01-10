@@ -25,7 +25,7 @@ export default function Dashboard(){
             </div>
             <div className="subjects-container">
                 <SubjectsCard setCurrentSubject={setCurrentSubject} subjectList={subjects} setSubjects={setSubjects}/>
-                <SubjectInfo currentSubject={currentSubject} subjectList={subjects}/>
+                <SubjectInfo currentSubject={currentSubject} subjectList={subjects} setSubjects={setSubjects}/>
             </div>
         </div>
     </div>
