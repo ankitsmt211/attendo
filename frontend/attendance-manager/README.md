@@ -10,6 +10,7 @@ A frontend application made using React, which interacts with Spring Boot based 
 ![Alt text](src/assets/register.png)
 
 ### Home
+![Alt text](src/assets/userhome.png)
 <hr>
 
 ### Getting Started
