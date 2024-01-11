@@ -4,13 +4,13 @@ A frontend application made using React, which interacts with Spring Boot based 
 <hr>
 
 ### Login
-![Alt text](src/assets/login.png)
+![login page](src/assets/login.png)
 
 ### Register
-![Alt text](src/assets/register.png)
+![register page](src/assets/register.png)
 
 ### Home
-![Alt text](src/assets/userhome.png)
+![userhome page](src/assets/userhome.png)
 <hr>
 
 ### Getting Started
