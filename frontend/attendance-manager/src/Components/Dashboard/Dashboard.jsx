@@ -21,14 +21,13 @@ export default function Dashboard(){
     const [subjects,setSubjects] = useState(subjectList)
     const [currentSubject,setCurrentSubject] = useState(subjectList[0])
     const [showDeleteModal,setShowDeleteModal] = useState(false)
-    const [deleteCurrentSubject,setDeleteCurrentSubject] = useState(false)
 
     
 
     return <>
     <currentSubjectContext.Provider value={[currentSubject,setCurrentSubject]}>
     <div className="base-container">
-        {showDeleteModal && <ConfirmDelete status={showDeleteModal} setStatus={setShowDeleteModal} setDeleteCurrentSubject={setDeleteCurrentSubject}/>}
+        {showDeleteModal && <ConfirmDelete status={showDeleteModal} setStatus={setShowDeleteModal}  subjects={subjects} setSubjects={setSubjects} />}
         <h1 className="application-name">{'attendo'}</h1>
         <div className="dashboard-user">
             <div className="">
@@ -36,7 +35,7 @@ export default function Dashboard(){
             </div>
             <div className="subjects-container">
                 <SubjectsCard subjectList={subjects} setSubjects={setSubjects}/>
-                <SubjectInfo  subjectList={subjects} setSubjects={setSubjects} setShowDeleteModal={setShowDeleteModal} deleteCurrentSubject={deleteCurrentSubject} setDeleteCurrentSubject={setDeleteCurrentSubject}/>
+                <SubjectInfo  subjectList={subjects} setSubjects={setSubjects} setShowDeleteModal={setShowDeleteModal} />
             </div>
         </div>
     </div>

@@ -5,11 +5,11 @@ import '../ConfirmationModal/ConfirmDelete'
 import {currentSubjectContext} from '../Dashboard/Dashboard'
 
 import '../SubjectInfo/SubjectInfo.css'
-export default function SubjectInfo({subjectList,setSubjects,setShowDeleteModal,deleteCurrentSubject,setDeleteCurrentSubject}){
+export default function SubjectInfo({subjectList,setSubjects,setShowDeleteModal}){
     return <>
     {
         <div className="subject-info">
-            <ActiveSubject subjectList={subjectList} setSubjects={setSubjects} setShowDeleteModal={setShowDeleteModal} deleteCurrentSubject={deleteCurrentSubject} setDeleteCurrentSubject={setDeleteCurrentSubject}/>
+            <ActiveSubject subjectList={subjectList} setSubjects={setSubjects} setShowDeleteModal={setShowDeleteModal}/>
         </div>
     }
     </>
@@ -17,6 +17,11 @@ export default function SubjectInfo({subjectList,setSubjects,setShowDeleteModal,
 
 function ActiveSubject({subjectList,setSubjects,setShowDeleteModal,deleteCurrentSubject,setDeleteCurrentSubject}){
     const [currentSubject,setCurrentSubject] = useContext(currentSubjectContext)
+
+    useEffect(()=>{
+        console.log("curr sub changed")
+        return ()=> console.log("cleanup")
+    },[currentSubject])
 
     const handleAbsent = () => {
         //increment total classes only
