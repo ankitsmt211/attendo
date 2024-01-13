@@ -1,6 +1,10 @@
-import { useRef } from 'react'
+import { useRef,useContext } from 'react'
 import '../SubjectsCard/SubjectsCard.css'
-export default function SubjectsCard({setCurrentSubject,subjectList,setSubjects}){
+import { currentSubjectContext } from '../Dashboard/Dashboard'
+
+export default function SubjectsCard({subjectList,setSubjects}){
+
+
 
     const addSubjectRef = useRef()
     const handleAddSubject = ()=>{
@@ -18,7 +22,7 @@ export default function SubjectsCard({setCurrentSubject,subjectList,setSubjects}
     <div className="subject-list">
         {
             subjectList.map(subject=>{
-                return <Subject subjectDetails={subject} setCurrentSubject={setCurrentSubject} setSubjects={setSubjects} subjectList={subjectList}/>
+                return <Subject subjectDetails={subject} setSubjects={setSubjects} subjectList={subjectList}/>
             })
         }
         <div className='new-subject-container'>
@@ -29,10 +33,19 @@ export default function SubjectsCard({setCurrentSubject,subjectList,setSubjects}
     </>
 }
 
-function Subject({subjectDetails,setCurrentSubject,setSubjects,subjectList}){
+function Subject({subjectDetails,setSubjects,subjectList}){
+
+    const [currentSubject,setCurrentSubject] = useContext(currentSubjectContext)
+    
     const handleCurrentSubject = (e)=>{
         console.log(e.target.innerText.toLowerCase())
-        setCurrentSubject(e.target.innerText.toLowerCase())
+        let currentSubjectName = e.target.innerText.toLowerCase()
+
+        subjectList.map(sub=>{
+            if(sub.name===currentSubjectName){
+                setCurrentSubject(sub)
+            }
+        })
     }
 
     return<>

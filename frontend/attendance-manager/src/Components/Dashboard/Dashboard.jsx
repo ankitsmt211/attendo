@@ -2,7 +2,13 @@ import UserCard from "../UserCard/UserCard"
 import SubjectsCard from "../SubjectsCard/SubjectsCard"
 import SubjectInfo from "../SubjectInfo/SubjectInfo"
 import '../Dashboard/Dashboard.css'
-import { useEffect, useState } from "react"
+import { useEffect, useState, createContext } from "react"
+import '../ConfirmationModal/ConfirmDelete'
+import ConfirmDelete from "../ConfirmationModal/ConfirmDelete"
+
+
+
+export const currentSubjectContext = createContext()
 
 export default function Dashboard(){
     const subjectList = [
@@ -13,21 +19,27 @@ export default function Dashboard(){
     ]
 
     const [subjects,setSubjects] = useState(subjectList)
-    const [currentSubject,setCurrentSubject] = useState('')
-  
+    const [currentSubject,setCurrentSubject] = useState(subjectList[0])
+    const [showDeleteModal,setShowDeleteModal] = useState(false)
+    const [deleteCurrentSubject,setDeleteCurrentSubject] = useState(false)
+
+    
 
     return <>
+    <currentSubjectContext.Provider value={[currentSubject,setCurrentSubject]}>
     <div className="base-container">
+        {showDeleteModal && <ConfirmDelete status={showDeleteModal} setStatus={setShowDeleteModal} setDeleteCurrentSubject={setDeleteCurrentSubject}/>}
         <h1 className="application-name">{'attendo'}</h1>
         <div className="dashboard-user">
             <div className="">
                 <UserCard/>
             </div>
             <div className="subjects-container">
-                <SubjectsCard setCurrentSubject={setCurrentSubject} subjectList={subjects} setSubjects={setSubjects}/>
-                <SubjectInfo currentSubject={currentSubject} subjectList={subjects} setSubjects={setSubjects}/>
+                <SubjectsCard subjectList={subjects} setSubjects={setSubjects}/>
+                <SubjectInfo  subjectList={subjects} setSubjects={setSubjects} setShowDeleteModal={setShowDeleteModal} deleteCurrentSubject={deleteCurrentSubject} setDeleteCurrentSubject={setDeleteCurrentSubject}/>
             </div>
         </div>
     </div>
+    </currentSubjectContext.Provider>
     </>
 }
