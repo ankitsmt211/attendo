@@ -16,6 +16,7 @@ export default function SubjectsCard({subjectList,setSubjects}){
 
         const modifiedSubjects = [...subjectList,subjectToAdd]
         setSubjects(modifiedSubjects)
+        addSubjectRef.current.value=""
     }
 
     return <>
@@ -50,10 +51,17 @@ function Subject({subjectDetails,setSubjects,subjectList}){
 
     return<>
       <div className='subject-block'>
-         <div className='subject-with-attendance'>
+         {/* <div className='subject-with-attendance'>
             <div className='subject-name' onClick={e=>handleCurrentSubject(e)}>{subjectDetails.name}</div>
             <div className='subject-attendance-percent'>{Math.floor((subjectDetails.attendedClasses/subjectDetails.totalClasses)*100)}</div>
+         </div> */}
+         <div className='subject-with-attendance'>
+            <div className='subject-name' onClick={e=>handleCurrentSubject(e)}>{subjectDetails.name}</div>
+            <div className='subject-attendance-percent'>
+            {subjectDetails.totalClasses > 0 ? Math.floor((subjectDetails.attendedClasses/subjectDetails.totalClasses)*100) : 0}
+            </div>
          </div>
-    </div>
+
+      </div>
     </>
 }
