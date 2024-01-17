@@ -84,11 +84,16 @@ function ActiveSubject({subjectList,setSubjects,setShowDeleteModal,deleteCurrent
                 }
             </div>
         
-            <div className='attendance-buttons-container'>
-                <button className='absent-button' onClick={handleAbsent}>Absent</button>
-                <FontAwesomeIcon icon={faTrash}  size='2x' color='#455A52' onClick={handleDelete}/>
-                <button className='present-button' onClick={handlePresent}>Present</button>
-            </div>
+        {
+            Object.keys(currentSubject).length>0 ?
+               <div className='attendance-buttons-container'>
+               <button className='absent-button' onClick={handleAbsent}>Absent</button>
+               <FontAwesomeIcon icon={faTrash}  size='2x' color='#455A52' onClick={handleDelete}/>
+               <button className='present-button' onClick={handlePresent}>Present</button>
+               </div>
+               :
+               <p className='info-no-subjects'>add subject to see details</p>
+        }
             </>
         );
     
