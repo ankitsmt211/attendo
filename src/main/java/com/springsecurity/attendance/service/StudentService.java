@@ -6,10 +6,12 @@ import com.springsecurity.attendance.repository.SubjectRepository;
 import com.springsecurity.attendance.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,20 +59,19 @@ public class StudentService {
         throw new Exception("subject can't be added");
     }
 
-
-    public String removeSubject(Integer subid, Authentication authentication) throws Exception {
-        List<Subject> subjects = getSubjects(authentication);
-        for (Subject sub : subjects) {
-            if (sub.getSubId() == subid) {
-                subjectRepository.deleteById(subid);
-                return "Subject with Id :" + subid + "removed successfully";
-            }
-
+    @Transactional
+    public ResponseEntity<List<Subject>> removeSubject(Integer subjectId, Authentication authentication){
+        try{
+            subjectRepository.deleteById(subjectId);
+            List<Subject> updatedSubjects = getSubjects(authentication);
+            return new ResponseEntity<>(updatedSubjects,HttpStatus.OK);
         }
-        throw new Exception("subject not found");
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    public ResponseEntity<Subject> increaseAttendance(Integer subjectId, Authentication authentication) throws Exception {
+    public ResponseEntity<Subject> increaseAttendance(Integer subjectId, Authentication authentication){
         Optional<UserEntity> OptionalUser = userEntityRepository.findByEmail(authentication.getName());
         Subject updatedSubject = null;
         if (OptionalUser.isPresent()) {
@@ -87,7 +88,7 @@ public class StudentService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    public ResponseEntity<Subject> decreaseAttendance(Integer subjectId, Authentication authentication) throws Exception {
+    public ResponseEntity<Subject> decreaseAttendance(Integer subjectId, Authentication authentication){
         Optional<UserEntity> OptionalUser = userEntityRepository.findByEmail(authentication.getName());
         Subject updatedSubject = null;
         if (OptionalUser.isPresent()) {

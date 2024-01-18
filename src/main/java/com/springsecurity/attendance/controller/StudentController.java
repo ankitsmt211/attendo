@@ -34,9 +34,9 @@ public class StudentController {
     public ResponseEntity<Subject> addSubject(@RequestBody Subject subject, Authentication authentication) throws Exception {
         return studentService.addSubject(subject, authentication);
     }
-    @DeleteMapping("/subjects/{subid}")
-    public String removeSubject(@PathVariable Integer subid, Authentication authentication) throws Exception {
-        return studentService.removeSubject(subid,authentication);
+    @DeleteMapping("/subjects/{subjectId}")
+    public ResponseEntity<List<Subject>> removeSubject(@PathVariable Integer subjectId, Authentication authentication) {
+        return studentService.removeSubject(subjectId,authentication);
     }
 
     @PutMapping("/subjects/is-present")
