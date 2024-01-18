@@ -12,6 +12,7 @@ export default function Home(){
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/userhome' element={<UserHome/>}/>
+                <Route path='/home' element={<Dashboard/>}/>
               </Routes>
     </BrowserRouter>
     </>
