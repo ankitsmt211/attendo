@@ -27,13 +27,6 @@ export default function Dashboard(){
         return await subjects.json()
     }
 
-    // const subjectList = [
-    //     {name:'maths',attendedClasses:10,totalClasses:12},
-    //     {name:'english',attendedClasses:3,totalClasses:4},
-    //     {name:'science',attendedClasses:7,totalClasses:13},
-    //     {name:'computer',attendedClasses:6,totalClasses:12}
-    // ]
-
     const [subjects,setSubjects] = useState([])
     const [currentSubject,setCurrentSubject] = useState({})
     const [showDeleteModal,setShowDeleteModal] = useState(false)

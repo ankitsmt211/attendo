@@ -16,23 +16,31 @@ export default function ConfirmDelete({status,setStatus,subjects,setSubjects}) {
   const [open, setOpen] = React.useState(false);
   const [currentSubject,setCurrentSubject] = React.useContext(currentSubjectContext)
 
-  const handleDelete = () => {
-    // setDeleteCurrentSubject(prev=>!prev)
-    console.log("set delete value")
+  const handleDelete = async () => {
+    const token = localStorage.getItem('token')
+    const url = `http://localhost:8080/api/v1/students/subjects/${currentSubject.subId}`
 
-    let modifiedSubjectArray = []
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            "Accept":"application/json"
+        }
+    })
 
-    for(let sub of subjects){
-      if(sub.name!==currentSubject.name){
-        modifiedSubjectArray.push(sub)
-      }
+    if(response.ok){
+        const updatedSubjects = await response.json()
+
+        setSubjects(updatedSubjects)
+        if(updatedSubjects.length>0){
+          setCurrentSubject(updatedSubjects[0])
+        }
+        else{
+          setCurrentSubject('')
+        }
+        setStatus(prev=>!prev)
     }
-
-    setSubjects([...modifiedSubjectArray])
-    let modifiedCurrentSubject = {...modifiedSubjectArray[0]}
-    console.log(modifiedCurrentSubject)
-    setCurrentSubject(modifiedCurrentSubject)
-    setStatus(prev=>!prev)
   };
 
   const handleClose = () => {
