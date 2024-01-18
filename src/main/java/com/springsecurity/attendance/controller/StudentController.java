@@ -39,9 +39,9 @@ public class StudentController {
         return studentService.removeSubject(subid,authentication);
     }
 
-    @PutMapping("/subjects/is-present/{subid}")
-    public String increaseAttendance(@PathVariable Integer subid, Authentication authentication) throws Exception {
-        return studentService.increaseAttendance(subid, authentication);
+    @PutMapping("/subjects/is-present")
+    public ResponseEntity<Subject> increaseAttendance(@RequestBody Integer subjectId,Authentication authentication) throws Exception {
+        return studentService.increaseAttendance(subjectId,authentication);
     }
 
 
