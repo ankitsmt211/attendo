@@ -4,6 +4,7 @@ import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.model.Subject;
 import com.springsecurity.attendance.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class StudentController {
     }
 
     @PostMapping("/subjects")
-    public String addSubject(@RequestBody Subject subject, Authentication authentication) throws Exception {
+    public ResponseEntity<Subject> addSubject(@RequestBody Subject subject, Authentication authentication) throws Exception {
         return studentService.addSubject(subject, authentication);
     }
     @DeleteMapping("/subjects/{subid}")

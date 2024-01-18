@@ -7,16 +7,34 @@ export default function SubjectsCard({subjectList,setSubjects}){
 
 
     const addSubjectRef = useRef()
-    const handleAddSubject = ()=>{
-        const subjectToAdd = {
+    const handleAddSubject = async ()=>{
+        let subjectToAdd = {
             name:addSubjectRef.current.value,
             attendedClasses:0,
             totalClasses:0
         }
 
-        const modifiedSubjects = [...subjectList,subjectToAdd]
-        setSubjects(modifiedSubjects)
-        addSubjectRef.current.value=""
+        const token = localStorage.getItem('token')
+        const url = 'http://localhost:8080/api/v1/students/subjects'
+        const response = await fetch(url,{
+            method:'POST',
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                "Accept":"application/json"
+            },
+            body:JSON.stringify(subjectToAdd)
+        })
+
+        if(response.ok){
+            subjectToAdd = await response.json()
+            const modifiedSubjects = [...subjectList,subjectToAdd]
+            setSubjects(modifiedSubjects)
+            addSubjectRef.current.value=""
+        }
+        else{
+        alert('was unable to add subject, please retry')
+        }
     }
 
     return <>

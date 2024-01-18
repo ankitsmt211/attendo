@@ -5,6 +5,8 @@ import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.repository.SubjectRepository;
 import com.springsecurity.attendance.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -41,7 +43,7 @@ public class StudentService {
         throw new Exception("User not found");
     }
 
-    public String addSubject(Subject subject, Authentication authentication) throws Exception {
+    public ResponseEntity<Subject> addSubject(Subject subject, Authentication authentication) throws Exception {
         String username = authentication.getName();
 
         Optional<UserEntity> OptionalUserEntity = userEntityRepository.findByEmail(username);
@@ -49,7 +51,7 @@ public class StudentService {
         if (OptionalUserEntity.isPresent()) {
             subject.setUserEntity(OptionalUserEntity.get());
             subjectRepository.save(subject);
-            return "subject saved successfully";
+            return new ResponseEntity<>(subject, HttpStatus.ACCEPTED);
         }
 
         throw new Exception("subject can't be added");
