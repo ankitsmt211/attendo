@@ -45,9 +45,9 @@ public class StudentController {
     }
 
 
-    @PutMapping("/subjects/is-absent/{subid}")
-    public String decreaseAttendance(@PathVariable Integer subid, Authentication authentication) throws Exception {
-        return studentService.decreaseAttendance(subid, authentication);
+    @PutMapping("/subjects/is-absent")
+    public ResponseEntity<Subject> decreaseAttendance(@RequestBody Integer subjectId, Authentication authentication) throws Exception {
+        return studentService.decreaseAttendance(subjectId, authentication);
     }
 
     @PutMapping("/subjects/reset/{subid}")

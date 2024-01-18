@@ -87,19 +87,20 @@ public class StudentService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    public String decreaseAttendance(Integer subid, Authentication authentication) throws Exception {
+    public ResponseEntity<Subject> decreaseAttendance(Integer subjectId, Authentication authentication) throws Exception {
         Optional<UserEntity> OptionalUser = userEntityRepository.findByEmail(authentication.getName());
+        Subject updatedSubject = null;
         if (OptionalUser.isPresent()) {
             List<Subject> subjects = subjectRepository.findAllByUserEntity(OptionalUser.get());
             for (Subject sub : subjects) {
-                if (sub.getSubId() == subid) {
+                if (sub.getSubId().equals(subjectId)) {
                     sub.setTotalClasses(sub.getTotalClasses() + 1);
-                    subjectRepository.save(sub);
+                    updatedSubject = subjectRepository.save(sub);
                 }
             }
-            return "Attendance marked for subject with ID : " + subid + " successfully";
+           return new ResponseEntity<>(updatedSubject,HttpStatus.OK);
         }
-        throw new UsernameNotFoundException("User not found");
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     public String removeStudent(String email) {
