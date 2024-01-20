@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useEffect,useState } from 'react'
-import '../ConfirmationModal/ConfirmDelete'
+import '../ConfirmationModal/ConfirmAction'
 import {currentSubjectContext} from '../Dashboard/Dashboard'
 
 import '../SubjectInfo/SubjectInfo.css'
