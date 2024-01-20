@@ -1,5 +1,6 @@
 package com.springsecurity.attendance.service;
 
+import com.springsecurity.attendance.dto.UserDto;
 import com.springsecurity.attendance.model.Subject;
 import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.repository.SubjectRepository;
@@ -27,13 +28,15 @@ public class StudentService {
         this.subjectRepository = subjectRepository;
     }
 
-    public UserEntity getStudent(String email) {
+    public ResponseEntity<UserDto> getStudent(String email) {
         Optional<UserEntity> OptionalUserEntity = userEntityRepository.findByEmail(email);
 
         if (OptionalUserEntity.isPresent()) {
-            return OptionalUserEntity.get();
+            UserEntity userEntity = OptionalUserEntity.get();
+            UserDto userDto = new UserDto(userEntity.getUsername(),userEntity.getEmail());
+            return new ResponseEntity<>(userDto,HttpStatus.OK);
         }
-        throw new UsernameNotFoundException("user doesnt exists");
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 

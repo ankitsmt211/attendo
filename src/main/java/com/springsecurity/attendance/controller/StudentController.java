@@ -1,5 +1,6 @@
 package com.springsecurity.attendance.controller;
 
+import com.springsecurity.attendance.dto.UserDto;
 import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.model.Subject;
 import com.springsecurity.attendance.service.StudentService;
@@ -21,7 +22,7 @@ public class StudentController {
     }
 
     @GetMapping
-    public UserEntity getStudent(Authentication authentication){
+    public ResponseEntity<UserDto> getStudent(Authentication authentication){
         return studentService.getStudent(authentication.getName());
     }
 
