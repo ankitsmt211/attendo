@@ -69,10 +69,6 @@ function Subject({subjectDetails,setSubjects,subjectList}){
 
     return<>
       <div className='subject-block'>
-         {/* <div className='subject-with-attendance'>
-            <div className='subject-name' onClick={e=>handleCurrentSubject(e)}>{subjectDetails.name}</div>
-            <div className='subject-attendance-percent'>{Math.floor((subjectDetails.attendedClasses/subjectDetails.totalClasses)*100)}</div>
-         </div> */}
          <div className='subject-with-attendance'>
             <div className='subject-name' onClick={e=>handleCurrentSubject(e)}>{subjectDetails.name}</div>
             <div className='subject-attendance-percent'>
