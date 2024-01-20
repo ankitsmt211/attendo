@@ -18,7 +18,7 @@ export default function Dashboard(){
             method:'GET',
             headers:{
                 "Authorization": `Bearer ${token}`,
-                'Content-type': 'application/json',
+                'Content-Type': 'application/json',
                 "Accept":"application/json",
               }
         })
@@ -26,9 +26,32 @@ export default function Dashboard(){
         return await subjects.json()
     }
 
+    async function loadUser(){
+        const token = localStorage.getItem('token')
+        const url = 'http://localhost:8080/api/v1/students'
+
+        const user = await fetch(url,{
+            method:'GET',
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                "Accept":"application/json"
+            }
+        })
+
+        if(user.ok){
+            return user.json()
+        }
+        else{
+            console.error(`Error:${user.status}`)
+        }
+    }
+
+    const [user,setUser] = useState(null)
     const [subjects,setSubjects] = useState([])
     const [currentSubject,setCurrentSubject] = useState({})
     const [showDeleteModal,setShowDeleteModal] = useState(false)
+    const [isLoading,setIsLoading] = useState(true)
 
     const deletion = async () => {
         const token = localStorage.getItem('token')
@@ -71,8 +94,16 @@ export default function Dashboard(){
         const subjectDetails = loadSubjects()
         subjectDetails.then((data)=>setSubjects(data))
     },[])
-    
 
+    useEffect(()=>{
+        const user = loadUser()
+        user.then(data=>{
+            setUser(data)
+            setIsLoading(false)
+        })
+    },[])
+
+    // console.log(user)
     return <>
     <currentSubjectContext.Provider value={[currentSubject,setCurrentSubject]}>
     <div className="base-container">
@@ -80,7 +111,7 @@ export default function Dashboard(){
         <h1 className="application-name">{'attendo'}</h1>
         <div className="dashboard-user">
             <div className="">
-                <UserCard/>
+                {!isLoading && <UserCard userDetails={user} noOfSubjects={subjects.length}/>}
             </div>
             <div className="subjects-container">
                 <SubjectsCard subjectList={subjects} setSubjects={setSubjects}/>

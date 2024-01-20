@@ -2,38 +2,39 @@ import '../UserCard/UserCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserTie } from '@fortawesome/free-solid-svg-icons'
 
-export default function UserCard(){
+export default function UserCard({userDetails,noOfSubjects}){
+    console.log(userDetails)
     return <>
     <div>
         <div className="user-container">
-            <UserAvatarWithName/> 
-            <UserInfo/>
+            <UserAvatarWithName userDetails={userDetails}/> 
+            <UserInfo userDetails={userDetails} noOfSubjects={noOfSubjects}/>
         </div>
     </div>
     </>
 }
 
-function UserAvatarWithName(){
+function UserAvatarWithName({userDetails}){
     return <>
     <div className="user-avatar-with-name">
         <div className='user-avatar'>
             <FontAwesomeIcon icon={faUserTie} size='7x' />
         </div>
     <div className='user-name'>
-        {"John Doe"}
+        {`${userDetails.name}`}
     </div>
     </div>
     </>
 }
 
-function UserInfo(){
+function UserInfo({userDetails,noOfSubjects}){
     return <>
     <div className='user-info-container'>
         <div>
-            {'email: johndoe@xyz.com'}
+            {`email: ${userDetails.email}`}
         </div>
         <div>
-            {'no of subjects: 4'}
+            {`no of subjects: ${noOfSubjects}`}
         </div>
         <div>
             {'school: ABC school of Engineering'}
