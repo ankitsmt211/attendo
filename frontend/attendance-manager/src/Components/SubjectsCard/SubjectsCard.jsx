@@ -3,9 +3,7 @@ import '../SubjectsCard/SubjectsCard.css'
 import { currentSubjectContext } from '../Dashboard/Dashboard'
 
 export default function SubjectsCard({subjectList,setSubjects}){
-
-
-
+    
     const addSubjectRef = useRef()
     const handleAddSubject = async ()=>{
         let subjectToAdd = {
