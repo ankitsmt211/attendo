@@ -120,7 +120,7 @@ function ActiveSubject({ subjectList, setSubjects, setShowDeleteModal }) {
           <button className="absent-button" onClick={handleAbsent}>
             Absent
           </button>
-          <FontAwesomeIcon icon={faTrash} size="2x" color="#455A52" onClick={handleDelete} />
+          <FontAwesomeIcon icon={faTrash} size="2x" color="#455A52" onClick={handleDelete} className="delete-button" />
           <button className="present-button" onClick={handlePresent}>
             Present
           </button>

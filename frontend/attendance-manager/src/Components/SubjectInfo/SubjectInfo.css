@@ -118,3 +118,7 @@
   text-align: center;
   color: #455a52;
 }
+
+.delete-button:hover {
+  cursor: pointer;
+}

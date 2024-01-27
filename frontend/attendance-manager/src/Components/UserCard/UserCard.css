@@ -43,3 +43,7 @@
 .logout-button-container {
   margin: 15px;
 }
+
+.logout-button-container:hover {
+  cursor: pointer;
+}
