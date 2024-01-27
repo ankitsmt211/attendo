@@ -1,42 +1,45 @@
-.user-container{
-    display: flex;
-    /* border: 1px solid black; */
-    background-color: #455A52;
-    color: #f5f5f5;
-    margin-top: -50px;
-   
+.user-container {
+  display: flex;
+  /* border: 1px solid black; */
+  background-color: #455a52;
+  color: #f5f5f5;
+  margin-top: -50px;
 }
 
-.user-avatar-with-name{
-    /* border: 1px solid black; */
-    width: 470px;
-    /* margin-left: 55px; */
+.user-avatar-with-name {
+  /* border: 1px solid black; */
+  width: 470px;
+  /* margin-left: 55px; */
 }
 
-.user-avatar{
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+.user-avatar {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.user-name{
-    text-align: center;
-    padding: 10px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    width: 100%;
+.user-name {
+  text-align: center;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  width: 100%;
 }
 
-.user-info-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    /* padding: 10px; */
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    align-items: flex-start;
-    width: 100%;
-    padding-left: 100px;
-    letter-spacing: 0.5px;
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* padding: 10px; */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  align-items: flex-start;
+  width: 100%;
+  padding-left: 100px;
+  letter-spacing: 0.5px;
+}
+
+.logout-button-container {
+  margin: 15px;
 }
