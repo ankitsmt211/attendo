@@ -38,7 +38,9 @@ export default function SubjectsCard({ subjectList, setSubjects }) {
     <>
       <div className="subject-list">
         {subjectList.map((subject) => {
-          return <Subject subjectDetails={subject} setSubjects={setSubjects} subjectList={subjectList} />;
+          return (
+            <Subject subjectDetails={subject} setSubjects={setSubjects} subjectList={subjectList} key={subject.subId} />
+          );
         })}
         <div className="new-subject-container">
           <input type="text" ref={addSubjectRef} className="new-subject-input" />
@@ -63,7 +65,7 @@ function Subject({ subjectDetails, setSubjects, subjectList }) {
     console.log(e.target.innerText.toLowerCase());
     let currentSubjectName = e.target.innerText.toLowerCase();
 
-    subjectList.map((sub) => {
+    subjectList.forEach((sub) => {
       if (sub.name === currentSubjectName) {
         setCurrentSubject(sub);
       }
