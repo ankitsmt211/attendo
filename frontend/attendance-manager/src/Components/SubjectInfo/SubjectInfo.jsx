@@ -111,7 +111,7 @@ function ActiveSubject({ subjectList, setSubjects, setShowDeleteModal }) {
     <>
       <div className="current-subject-container">
         {Object.keys(currentSubject).map((key) => {
-          return <div className="subject-field">{`${key} : ${currentSubject[`${key}`]}`}</div>;
+          return <div className="subject-field" key={key}>{`${key} : ${currentSubject[`${key}`]}`}</div>;
         })}
       </div>
 
