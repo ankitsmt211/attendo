@@ -11,19 +11,18 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ConfirmAction({status,setStatus, actionConfirmation}) {
+export default function ConfirmAction({ status, setStatus, actionConfirmation }) {
   const handlePrimary = async () => {
-    const success = await actionConfirmation.action()
-    if(success){
-      setStatus(prev=>!prev)
-    }
-    else{
-      alert('unable to do primary action')
+    const success = await actionConfirmation.action();
+    if (success) {
+      setStatus((prev) => !prev);
+    } else {
+      alert('unable to do primary action');
     }
   };
 
   const handleSecondary = () => {
-    setStatus(prev=>!prev)
+    setStatus((prev) => !prev);
   };
 
   return (
@@ -39,9 +38,7 @@ export default function ConfirmAction({status,setStatus, actionConfirmation}) {
       >
         <DialogTitle>{actionConfirmation.modalTitle}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-           {actionConfirmation.modalText}
-          </DialogContentText>
+          <DialogContentText id="alert-dialog-slide-description">{actionConfirmation.modalText}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handlePrimary}>{actionConfirmation.primaryButton}</Button>
