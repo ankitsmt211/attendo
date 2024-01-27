@@ -59,7 +59,7 @@ SubjectsCard.propTypes = {
 };
 
 function Subject({ subjectDetails, setSubjects, subjectList }) {
-  const [currentSubject, setCurrentSubject] = useContext(currentSubjectContext);
+  const [, setCurrentSubject] = useContext(currentSubjectContext);
 
   const handleCurrentSubject = (e) => {
     console.log(e.target.innerText.toLowerCase());
