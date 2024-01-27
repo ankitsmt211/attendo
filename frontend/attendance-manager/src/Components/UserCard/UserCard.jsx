@@ -1,16 +1,16 @@
 import '../UserCard/UserCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { faUserTie, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
-export default function UserCard({ userDetails, noOfSubjects }) {
+export default function UserCard({ userDetails, noOfSubjects, setShowLogoutModal }) {
   console.log(userDetails);
   return (
     <>
       <div>
         <div className="user-container">
           <UserAvatarWithName userDetails={userDetails} />
-          <UserInfo userDetails={userDetails} noOfSubjects={noOfSubjects} />
+          <UserInfo userDetails={userDetails} noOfSubjects={noOfSubjects} setShowLogoutModal={setShowLogoutModal} />
         </div>
       </div>
     </>
@@ -20,6 +20,7 @@ export default function UserCard({ userDetails, noOfSubjects }) {
 UserCard.propTypes = {
   userDetails: PropTypes.object,
   noOfSubjects: PropTypes.number,
+  setShowLogoutModal: PropTypes.func,
 };
 
 function UserAvatarWithName({ userDetails }) {
@@ -39,13 +40,19 @@ UserAvatarWithName.propTypes = {
   userDetails: PropTypes.object,
 };
 
-function UserInfo({ userDetails, noOfSubjects }) {
+function UserInfo({ userDetails, noOfSubjects, setShowLogoutModal }) {
+  const handleLogout = () => {
+    setShowLogoutModal((prev) => !prev);
+  };
   return (
     <>
       <div className="user-info-container">
         <div>{`email: ${userDetails.email}`}</div>
         <div>{`no of subjects: ${noOfSubjects}`}</div>
         <div>{'school: ABC school of Engineering'}</div>
+      </div>
+      <div className="logout-button-container">
+        <FontAwesomeIcon icon={faRightFromBracket} size="2x" onClick={handleLogout} />
       </div>
     </>
   );
@@ -54,4 +61,5 @@ function UserInfo({ userDetails, noOfSubjects }) {
 UserInfo.propTypes = {
   userDetails: PropTypes.object,
   noOfSubjects: PropTypes.number,
+  setShowLogoutModal: PropTypes.func,
 };

@@ -100,4 +100,12 @@ const deleteSubject = async (currentSubject, setCurrentSubject, setSubjects) => 
   return false;
 };
 
-export { loadSubjects, loadUser, deleteSubject };
+function logout() {
+  localStorage.removeItem('token');
+  // Redirect to the login page
+  window.location.href = '/login';
+  console.log('logged user out');
+  return true;
+}
+
+export { loadSubjects, loadUser, deleteSubject, logout };
