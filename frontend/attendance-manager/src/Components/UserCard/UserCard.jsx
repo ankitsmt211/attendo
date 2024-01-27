@@ -1,6 +1,7 @@
 import '../UserCard/UserCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
 export default function UserCard({ userDetails, noOfSubjects }) {
   console.log(userDetails);
@@ -16,6 +17,11 @@ export default function UserCard({ userDetails, noOfSubjects }) {
   );
 }
 
+UserCard.propTypes = {
+  userDetails: PropTypes.object,
+  noOfSubjects: PropTypes.number,
+};
+
 function UserAvatarWithName({ userDetails }) {
   return (
     <>
@@ -29,6 +35,10 @@ function UserAvatarWithName({ userDetails }) {
   );
 }
 
+UserAvatarWithName.propTypes = {
+  userDetails: PropTypes.object,
+};
+
 function UserInfo({ userDetails, noOfSubjects }) {
   return (
     <>
@@ -40,3 +50,8 @@ function UserInfo({ userDetails, noOfSubjects }) {
     </>
   );
 }
+
+UserInfo.propTypes = {
+  userDetails: PropTypes.object,
+  noOfSubjects: PropTypes.number,
+};

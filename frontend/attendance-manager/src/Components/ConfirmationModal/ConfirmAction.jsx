@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import PropTypes from 'prop-types';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -48,3 +49,9 @@ export default function ConfirmAction({ status, setStatus, actionConfirmation })
     </React.Fragment>
   );
 }
+
+ConfirmAction.propTypes = {
+  status: PropTypes.bool,
+  setStatus: PropTypes.func,
+  actionConfirmation: PropTypes.func,
+};

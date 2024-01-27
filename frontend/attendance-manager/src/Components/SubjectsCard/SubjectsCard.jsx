@@ -1,6 +1,7 @@
 import { useRef, useContext } from 'react';
 import '../SubjectsCard/SubjectsCard.css';
 import { currentSubjectContext } from '../Dashboard/Dashboard';
+import PropTypes from 'prop-types';
 
 export default function SubjectsCard({ subjectList, setSubjects }) {
   const addSubjectRef = useRef();
@@ -50,6 +51,11 @@ export default function SubjectsCard({ subjectList, setSubjects }) {
   );
 }
 
+SubjectsCard.propTypes = {
+  subjectList: PropTypes.array,
+  setSubjects: PropTypes.func,
+};
+
 function Subject({ subjectDetails, setSubjects, subjectList }) {
   const [currentSubject, setCurrentSubject] = useContext(currentSubjectContext);
 
@@ -81,3 +87,9 @@ function Subject({ subjectDetails, setSubjects, subjectList }) {
     </>
   );
 }
+
+Subject.propTypes = {
+  subjectDetails: PropTypes.object,
+  setSubjects: PropTypes.func,
+  subjectList: PropTypes.array,
+};
