@@ -14,11 +14,19 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function ConfirmAction({ status, setStatus, actionConfirmation }) {
   const handlePrimary = async () => {
-    const success = await actionConfirmation.action();
+    let success;
+    const actionResult = actionConfirmation.action();
+
+    if (actionResult instanceof Promise) {
+      success = await actionResult;
+    } else {
+      success = actionResult;
+    }
+
     if (success) {
       setStatus((prev) => !prev);
     } else {
-      alert('unable to do primary action');
+      alert(`Unable to do ${actionConfirmation.name}`);
     }
   };
 
@@ -53,5 +61,5 @@ export default function ConfirmAction({ status, setStatus, actionConfirmation })
 ConfirmAction.propTypes = {
   status: PropTypes.bool,
   setStatus: PropTypes.func,
-  actionConfirmation: PropTypes.func,
+  actionConfirmation: PropTypes.object,
 };
