@@ -100,8 +100,12 @@ const deleteSubject = async (currentSubject, setCurrentSubject, setSubjects) => 
   return false;
 };
 
+/**
+ * Clears the local storage, logs the user out, and redirects to the login page.
+ * @returns {boolean} Returns true if the function executes successfully.
+ */
 function logout() {
-  localStorage.removeItem('token');
+  localStorage.clear();
   // Redirect to the login page
   window.location.href = '/login';
   console.log('logged user out');
