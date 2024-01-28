@@ -35,12 +35,27 @@ export default function Dashboard() {
     action: () => logout(),
   };
 
+  // useEffect(() => {
+  //   if (!localStorage.getItem('token')) {
+  //     redirect('/login');
+  //   } else {
+  //     const subjectDetails = loadSubjects();
+  //     subjectDetails.then((data) => setSubjects(data));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   const user = loadUser();
+  //   user.then((data) => {
+  //     setUser(data);
+  //     setIsLoading(false);
+  //   });
+  // }, []);
+
   useEffect(() => {
     const subjectDetails = loadSubjects();
     subjectDetails.then((data) => setSubjects(data));
-  }, []);
 
-  useEffect(() => {
     const user = loadUser();
     user.then((data) => {
       setUser(data);
