@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './auth.css';
+import { authContext } from '../../App';
 
 const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(authContext);
 
   const handleToken = (token) => {
     localStorage.setItem('token', token);
+    setIsLoggedIn(true);
   };
 
   const handleLogin = async (e) => {
