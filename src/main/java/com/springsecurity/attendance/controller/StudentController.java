@@ -1,7 +1,7 @@
 package com.springsecurity.attendance.controller;
 
+import com.springsecurity.attendance.dto.UpdateUserDto;
 import com.springsecurity.attendance.dto.UserDto;
-import com.springsecurity.attendance.model.UserEntity;
 import com.springsecurity.attendance.model.Subject;
 import com.springsecurity.attendance.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +65,10 @@ public class StudentController {
     @GetMapping("/subjects/{subid}/attendance")
     public double getAttendance(Authentication authentication, @PathVariable Integer subid){
         return studentService.getAttendancePercentage(authentication,subid);
+    }
+
+    @PutMapping
+    public ResponseEntity<UserDto> updateStudent(Authentication authentication, @RequestBody UpdateUserDto updateUserDto){
+        return studentService.updateStudent(authentication.getName(),updateUserDto);
     }
 }

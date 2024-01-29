@@ -1,5 +1,6 @@
 package com.springsecurity.attendance.service;
 
+import com.springsecurity.attendance.dto.UpdateUserDto;
 import com.springsecurity.attendance.dto.UserDto;
 import com.springsecurity.attendance.model.Subject;
 import com.springsecurity.attendance.model.UserEntity;
@@ -7,12 +8,13 @@ import com.springsecurity.attendance.repository.SubjectRepository;
 import com.springsecurity.attendance.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,11 +23,13 @@ import java.util.Optional;
 public class StudentService {
     private final UserEntityRepository userEntityRepository;
     private final SubjectRepository subjectRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public StudentService(UserEntityRepository userEntityRepository, SubjectRepository subjectRepository) {
+    public StudentService(UserEntityRepository userEntityRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder) {
         this.userEntityRepository = userEntityRepository;
         this.subjectRepository = subjectRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public ResponseEntity<UserDto> getStudent(String email) {
@@ -147,5 +151,20 @@ public class StudentService {
         double attendancePercent = (attendedClasses*100)/totalClasses;
 
         return attendancePercent;
+    }
+
+    public ResponseEntity<UserDto> updateStudent(String email, UpdateUserDto updateUserDto){
+        Optional<UserEntity> userEntityOptional = userEntityRepository.findByEmail(email);
+
+        if(userEntityOptional.isPresent()){
+            UserEntity retrievedUser = userEntityOptional.orElseThrow();
+            retrievedUser.setEmail(updateUserDto.email());
+            retrievedUser.setUsername(updateUserDto.username());
+            retrievedUser.setPassword(passwordEncoder.encode(updateUserDto.password()));
+            UserEntity updatedUserEntity = userEntityRepository.save(retrievedUser);
+            UserDto updatedUser = new UserDto(updatedUserEntity.getUsername(),updatedUserEntity.getEmail());
+            return new ResponseEntity<>(updatedUser,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }
