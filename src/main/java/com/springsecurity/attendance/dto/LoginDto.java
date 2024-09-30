@@ -1,4 +1,6 @@
 package com.springsecurity.attendance.dto;
 
-public record LoginDto(String email,String password) {
+import jakarta.validation.constraints.NotNull;
+
+public record LoginDto(@NotNull(message = "email is required") String email, @NotNull(message = "password is required") String password) {
 }

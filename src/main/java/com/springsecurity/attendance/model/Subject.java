@@ -3,7 +3,7 @@ package com.springsecurity.attendance.model;
 import jakarta.persistence.*;
 
 @Entity
-//@Table(name="subject")
+@Table(name="subject")
 public class Subject {
 
     @Id

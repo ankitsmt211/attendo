@@ -44,6 +44,10 @@ public class AuthenticationService {
     catch (AuthenticationException exception){
       return new CustomResponse(false,"user with given email/password can not be found");
     }
+
+    catch(Exception e){
+      return new CustomResponse(false,e.getMessage());
+    }
   }
 
   public CustomResponse register(RegisterDto registerDto){
