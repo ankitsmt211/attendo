@@ -1,6 +1,5 @@
 package com.springsecurity.attendance.config;
 
-import com.springsecurity.attendance.repository.UserEntityRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -36,22 +36,31 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if(authHeader!=null && authHeader.startsWith("Bearer ")){
             String token = authHeader.substring(7);
 
-            //extract name
-            String username = jwtService.extractUsernameFromToken(token);
+            try{
+                //extract name
+                String username = jwtService.extractUsernameFromToken(token);
 
-            //check validity
-            if(jwtService.isTokenValid(token)){
-                MyUserDetails user = customUserDetailsService.loadUserByUsername(username);
+                //check validity
+                if(jwtService.isTokenValid(token)){
+                    MyUserDetails user = customUserDetailsService.loadUserByUsername(username);
 
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
-                        null,
-                        user.getAuthorities()
-                );
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            user.getUsername(),
+                            null,
+                            user.getAuthorities()
+                    );
 
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
             }
+
+            catch(AuthenticationCredentialsNotFoundException authenticationCredentialsNotFoundException){
+                response.getWriter().write("Invalid/Expired token");
+                response.setStatus(400);
+                return;
+            }
+
 
         }
 

@@ -4,6 +4,7 @@ import com.springsecurity.attendance.dto.LoginDto;
 import com.springsecurity.attendance.dto.RegisterDto;
 import com.springsecurity.attendance.response.CustomResponse;
 import com.springsecurity.attendance.service.AuthenticationService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,11 @@ public class AuthenticationController {
     }
 
     @PostMapping ("/login")
-    public CustomResponse login(@RequestBody LoginDto loginDto) throws AuthenticationException{
+    public CustomResponse login(@Valid @RequestBody LoginDto loginDto) throws AuthenticationException{
         return authenticationService.login(loginDto);
     }
     @PostMapping("/register")
-    public CustomResponse register(@RequestBody RegisterDto registerDto){
+    public CustomResponse register(@Valid @RequestBody RegisterDto registerDto){
       return authenticationService.register(registerDto);
     }
 }
